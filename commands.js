@@ -10,7 +10,7 @@ db.createCollection("bounties")
 
 // ADD THE ANIMAL BOUNTIES
 // 1. Insert the given "Thanoceros" bounty object
-db.jaskis.insertOne({
+db.bounties.insertOne({
     name: "Thanoceros",
     species: "Rhinoceros",
     location: "Grasslands",
@@ -21,10 +21,10 @@ db.jaskis.insertOne({
   })
 
 // 2. Query for all bounties in the bounties collection
-jaskis.find()
+db.bounties.find()
 
 // 3. Insert many bounties at once using the given objects
-[
+db.bounties.inserMany([
     {
       "name": "Lokinkajou",
       "species": "Kinkajou",
@@ -79,31 +79,31 @@ jaskis.find()
       "reward": 5000,
       "captured": false
     }
-  ]
+])
 
 // MANAGE THE DATABASE
 // Queries
 // 1. Query for all bounties in the Grasslands
-db.jaskis.find({ location: "Grasslands" })
+db.bounties.find({ location: "Grasslands" })
 
 // 2. Query for all bounties with a reward worth 10000 or more
-db.jaskis.find({ reward: {$gt: 10000 } })
+db.bounties.find({ reward: {$gt: 10000 } })
 
 // 3. Query for all bounties, but exclude the client attribute from being shown
-db.jaskis.find({}, { client: 0 })
+db.bounties.find({}, { client: 0 })
 
 // 4. Query for a Groundhog in the Woodlands
-db.jaskis.find({ $and: [{ species: "Groundhog",  location: "Woodlands" }] })
+db.bounties.find({ $and: [{ species: "Groundhog",  location: "Woodlands" }] })
 
 // Update and Delete
 // 1. Update the reward for Polarwind to 10000
-db.jaskis.updateOne({ name: "Polarwind" }, { $set: { reward: 10000 } })
+db.bounties.updateOne({ name: "Polarwind" }, { $set: { reward: 10000 } })
 
 // 2. Remove Lokinkajou
-db.jaskis.deleteOne({ name: "Lokinkajou" })
+db.bounties.deleteOne({ name: "Lokinkajou" })
 
 // 3. Delete all bounties sent by Songbird
-db.jaskis.deleteMany({ client: "Songbird" })
+db.bounties.deleteMany({ client: "Songbird" })
 
 // 4. Update all captured statuses to true
-db.jaskis.updateMany({},{ $set: { captured: true } })
+db.bounties.updateMany({},{ $set: { captured: true } })
